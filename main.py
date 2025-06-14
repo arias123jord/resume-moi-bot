@@ -3,7 +3,7 @@ import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, CallbackContext, CallbackQueryHandler
 
-BOT_TOKEN = 'TON_TOKEN_ICI'  # Remplace ceci par ton token Telegram
+BOT_TOKEN = '7978605117:AAHIrRbcE9S712u8qJYXkUJvYyAON0WsRmc'  # Remplace ceci par ton token Telegram
 
 user_usage = {}
 
