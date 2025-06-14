@@ -1,9 +1,8 @@
-python
 import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, CallbackContext, CallbackQueryHandler
 
-BOT_TOKEN = '7978605117:AAHIrRbcE9S712u8qJYXkUJvYyAON0WsRmc'  # Remplace ceci par ton token Telegram
+BOT_TOKEN = '7978605117:AAHIrRbcE9S712u8qJYXkUJvYyAON0WsRmc'  # Remplace par ton vrai token ici
 
 user_usage = {}
 
@@ -20,10 +19,10 @@ def handle_message(update: Update, context: CallbackContext):
     user_usage[user_id] = user_usage.get(user_id, 0)
 
     if user_usage[user_id] < 3:
-        user_usage[user_id] += 1
+        user_usage[user_id] += 1  # Correction ici
         text = update.message.text
         summary = simulate_resume(text)
-update.message.reply_text(summary + f"\n\nUtilisation : {user_usage[user_id]}/3")
+        update.message.reply_text(summary + f"\n\nUtilisation : {user_usage[user_id]}/3")
     else:
         button = InlineKeyboardButton("✅ J’ai payé", callback_data="paid")
         markup = InlineKeyboardMarkup([[button]])
@@ -39,11 +38,10 @@ def handle_callback(update: Update, context: CallbackContext):
     user_usage[user_id] = 0
     query.edit_message_text("✅ Paiement confirmé. Tu peux reprendre tes résumés. Merci !")
 
-if _name_ == '_main_':
+if __name__ == '__main__':  # Correction ici
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     app.add_handler(CallbackQueryHandler(handle_callback))
     print("Bot lancé.")
     app.run_polling()
-```
